@@ -1,0 +1,28 @@
+name: Windows CI
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [x86_64-pc-windows-msvc, i686-pc-windows-msvc]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Rust toolchain
+        shell: pwsh
+        run: rustup show
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Lint
+        run: cargo clippy --locked --all-targets --target ${{ matrix.target }} -- -D warnings
+      - name: Test
+        run: cargo test --locked --target ${{ matrix.target }}
+      - name: Build release
+        run: cargo build --release --locked --target ${{ matrix.target }}

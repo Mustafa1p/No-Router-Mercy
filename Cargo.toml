@@ -1,0 +1,33 @@
+[package]
+name = "no-router-mercy"
+version = "0.1.0"
+edition = "2021"
+description = "Windows desktop network discovery and router auditing tool"
+repository = "https://github.com/Mustafa1p/No-Router-Mercy"
+readme = "README.md"
+keywords = ["network", "router", "scanner", "egui", "windows"]
+categories = ["network-programming", "gui"]
+
+[[bin]]
+name = "no-router-mercy"
+path = "src/main.rs"
+
+[dependencies]
+eframe  = { version = "0.29", default-features = true }
+egui    = "0.29"
+egui_extras = { version = "0.29", features = ["default"] }
+crossbeam-channel = "0.5"
+reqwest = { version = "=0.12.28", default-features = false, features = ["blocking", "rustls-tls", "gzip"] }
+base64  = "0.22"
+serde   = { version = "1", features = ["derive"] }
+serde_json = "1"
+rfd     = "0.15"          # native file dialog
+
+[dev-dependencies]
+socket2 = "0.6"
+
+[profile.release]
+opt-level = 3
+lto       = true
+codegen-units = 1
+strip     = true

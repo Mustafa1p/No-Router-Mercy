@@ -1,0 +1,26 @@
+# Build products and local tooling
+/target/
+/dist/
+/.codex-build/
+*.exe
+*.msi
+*.pdb
+*.res
+*.zip
+*.sha256
+
+# Runtime files may contain targets, credentials and scan results
+/config.ini
+/ports.txt
+/ranges.txt
+/auth_*.txt
+/filter.txt
+/exclusions.txt
+/*.log
+/results/
+/.env
+/.env.*
+/.vscode/
+/.idea/
+Thumbs.db
+Desktop.ini
